@@ -9,9 +9,12 @@ import java.util.List;
 import java.util.Set;
 import javaavancado_03.Usuario;
 import javaavancado_03.UsuarioDAOImpl;
+import org.dbunit.Assertion;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ITable;
 import org.dbunit.util.fileloader.FlatXmlDataFileLoader;
 import org.junit.Before;
 
@@ -41,7 +44,7 @@ public class TesteUsuarioDAO {
     // public void hello() {}
     @Test
     
-    public void insere()
+    public void insere() throws Exception
     {
         UsuarioDAOImpl ds = new UsuarioDAOImpl();
         Usuario u = new Usuario();
@@ -51,9 +54,13 @@ public class TesteUsuarioDAO {
         u.setSenha("elionara");
         u.setPontos(100);
         ds.inserir(u);
-        Usuario recuperado = new Usuario();
-        recuperado = ds.recuperar("elionara.silva");
-        assertEquals(u.getNome(), recuperado.getNome());
+        
+        IDataSet currentDatabase = jdt.getConnection().createDataSet();
+        ITable currentTable = currentDatabase.getTable("usuario");
+          FlatXmlDataFileLoader loader = new FlatXmlDataFileLoader();
+          IDataSet expectedDataset = loader.load("/verifica.xml");
+         ITable expectedTable = expectedDataset.getTable("usuario"); 
+        Assertion.assertEquals(expectedTable, currentTable);
         
         
     }
@@ -77,13 +84,21 @@ public class TesteUsuarioDAO {
     }
     
     @Test
-    public void adicionarPontos()
+    public void adicionarPontos() throws Exception
     {
         UsuarioDAOImpl ds = new UsuarioDAOImpl();
         ds.adicionarPontos("jean.carvalho", 1000);
-        Usuario us = new Usuario();
-        us = ds.recuperar("jean.carvalho");
-        assertEquals(1900, us.getPontos());
+        
+         IDataSet currentDatabase = jdt.getConnection().createDataSet();
+         ITable currentTable = currentDatabase.getTable("usuario");
+         FlatXmlDataFileLoader loader = new FlatXmlDataFileLoader();
+         IDataSet expectedDataset = loader.load("/verifica2.xml");
+         ITable expectedTable = expectedDataset.getTable("usuario"); 
+         Assertion.assertEquals(expectedTable, currentTable);
+       
+        //Usuario us = new Usuario();
+        //us = ds.recuperar("jean.carvalho");
+       // assertEquals(1900, us.getPontos());
     }
   
     

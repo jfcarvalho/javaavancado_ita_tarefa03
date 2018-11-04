@@ -9,6 +9,7 @@ and open the template in the editor.
 <dataset>
     <usuario login="alex.silva" nome="Alex Silva" email="alex.silva@solutis.com.br" senha="alex" pontos="1500" />
     <usuario login="edjane.paim" nome="Edjane Paim" email="edjane.paim@solutis.com.br" senha="edjane" pontos="200" />
+    <usuario login="elionara.silva" nome="Elionara Silva" email="elionara.silva@solutis.com.br" senha="elionara" pontos="100" />
     <usuario login="gitirana" nome="Alexandre Gitirana" email="gitirana@solutis.com.br" senha="gitirana" pontos="3000" />
     <usuario login="jean.carvalho" nome="Jean Carvalho" email="jean.carvalho@solutis.com.br" senha="jfcavalho" pontos="900" />
     <usuario login="marcos.lazaro" nome="Marcos Lázaro" email="marcos.lazaro@solutis.com.br" senha="marcos" pontos="500" />
